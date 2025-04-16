@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="image/44.png" type="image/png">
+    <meta name="description" content="quiksilver">
+    <title>magoas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script src="./script/app.js"></script>
+    <script src="./script/tailwind.config.js"></script>
+    <script src="./script/card.js"></script>
+
+    <link rel="stylesheet" href="./style/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* Animação de flutuação suave para cima e para baixo */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px); /* Eleva o contêiner 10px para cima */
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Aplica a animação ao contêiner */
+        #content {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="w-full h-screen overflow-hidden bg-black">
+    <audio id="audio" loop>
+        <!-- Inicialmente sem música -->
+    </audio>
+
+    <!-- Imagem que aparece sobre o botão antes do clique (GIF) -->
+    <div id="initialImage" class="absolute inset-0 flex items-center justify-center z-50 cursor-pointer">
+        <!-- Substituímos a imagem normal por um GIF -->
+        <img src="image/gif.gif" class="w-48 h-48 opacity-30">
+    </div>
+
+    <div class="flex items-center justify-center h-full w-full text-white overflow-y-auto md:overflow-y-hidden">
+        <button id="reveal" class="text-sm text-white animation-pulse hidden">$H4TRED</button>
+
+        <div id="content"
+            class="flex items-center md:justify-center flex-col space-y-4 pt-48 pb-8 md:flex-row md:space-x-4 md:space-y-0 md:py-0 w-full min-h-screen hidden opacity-0 transform scale-90 transition-all duration-500">
+            <div
+                class="flex flex-col items-center justify-center h-72 w-4/5 md:w-[25rem] md:h-56 space-y-4 bg-black text-white rounded-lg shadow-lg border border-zinc-600 relative p-6 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 glow-effect">
+                <div class="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-6">
+                    <div class="relative">
+                        <img class="w-30 h-30 rounded-full" id="avatar" src="image/avatar.png" alt="Avatar">
+                    </div>
+
+                    <div class="flex flex-col items-start text-center justify-center space-y-2">
+                        <div class="flex flex-col items-center justify-center w-full md:items-start">
+                            <h1 id="username" class="m-0 text-2xl font-bold"></h1>
+                            <div id="badges" class="flex space-x-1"></div>
+                            <p id="description" class="italic flex items-center">
+                                <i class="fas fa-map-marker-alt text-xs mr-2"></i> Santiago Chile
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <!-- Instagram Button -->
+                        <div class="flex items-center justify-center w-10 h-10 bg-black rounded-full flag-icon"
+                            onclick="window.open('https://www.tiktok.com/@unkyas')" title="yas">
+                            <img class="h-6 flag-icon" src="image/ttk2.PNG">
+                        </div>
+                        <!-- Twitter Button -->
+                        <div class="flex items-center justify-center w-10 h-10 bg-black rounded-full flag-icon"
+                            onclick="window.open('https://twitter.com/grassthemorning')" title="grassthemorning">
+                            <img class="h-6 flag-icon opacity-100" src="image/X (1).png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <video id="video"
+        class="fixed top-0 left-0 w-full h-full object-cover -z-10 brightness-[.3] saturate-100 hidden"
+        src="./image/shw2.mp4" loop muted playsInline webkit-playsinline></video>
+
+    <script>
+        const revealButton = document.getElementById("reveal");
+        const content = document.getElementById("content");
+        const initialImage = document.getElementById("initialImage");  // A imagem que será removida
+        const audioElement = document.getElementById('audio'); // Elemento de áudio
+
+        // Array de músicas (adicione os caminhos das suas músicas aqui)
+        const musicList = [
+            './audio/yas.mp3',
+            './audio/yas.mp3',
+            './audio/yas.mp3',
+        ];
+
+        let currentMusicIndex = 0;
+
+        // Função para escolher e trocar a música aleatória
+        function changeMusic() {
+            currentMusicIndex = Math.floor(Math.random() * musicList.length); // Escolhe uma música aleatória
+            audioElement.src = musicList[currentMusicIndex];
+        }
+
+        // Função para iniciar a música após o clique no botão
+        function startMusic() {
+            audioElement.play(); // Começa a tocar a música depois de clicado
+        }
+
+        function revealContent() {
+            // Revela o conteúdo
+            content.classList.remove("hidden");
+            setTimeout(() => {
+                content.classList.remove("opacity-0", "scale-90");
+            }, 50);
+
+            // Remove a imagem inicial após o clique
+            initialImage.classList.add("hidden");
+
+            // Exibe o botão, caso necessário
+            revealButton.classList.remove("hidden");
+
+            // Troca a música antes de começar a tocar
+            changeMusic();
+
+            // Inicia a música após o clique no conteúdo
+            startMusic();
+        }
+
+        // Adiciona o evento de clique no botão de revelação
+        revealButton.addEventListener("click", revealContent);
+
+        // Inicia a revelação ao clicar na imagem inicial
+        initialImage.addEventListener("click", () => {
+            revealButton.click(); // Simula o clique no botão para revelar o conteúdo
+        });
+    </script>
+
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+
+            if (e.ctrlKey && (e.shiftKey && (e.key === 'I' || e.key === 'J') || e.key === 'U')) {
+                e.preventDefault();
+            }
+
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x')) {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            alert('Cópia não permitida neste site.');
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "shape": {
+                    "type": "image",
+                    "image": {
+                        "src": "image/p1.png",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 10,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": false
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+    <div id="particles-js"></div>
+</body>
+
+</html>
+<script>
+    // Desabilita o clique com o botão direito do mouse
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // Desabilita a tecla F12 (console)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12') {
+            e.preventDefault();
+        }
+
+        // Desabilita as teclas Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) {
+            e.preventDefault();
+        }
+        if (e.ctrlKey && e.key === 'U') {
+            e.preventDefault();
+        }
+
+        // Desabilita Ctrl+C, Ctrl+V e Ctrl+X
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x')) {
+            e.preventDefault();
+        }
+    });
+
+    // Desabilita a seleção de texto
+    document.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+    });
+
+    // Desabilita a função de copiar ao pressionar Ctrl+C
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+    // Bloqueia ações de copiar, selecionar e segurar em dispositivos móveis
+    document.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+    });
+
+    // Desabilita a funcionalidade de selecionar texto em dispositivos móveis
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    });
+
+    // Impede o uso do gesto de copiar (pressionar e segurar)
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // Desabilita o menu de seleção em dispositivos móveis
+    document.body.style.webkitUserSelect = 'none'; // Safari
+    document.body.style.userSelect = 'none'; // Outros navegadores
+</script>
