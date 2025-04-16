@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="image/44.png" type="image/png">
-    <meta name="description" content="yaya">
-    <title>magoas</title>
+    <meta name="description" content="valorant">
+    <title>yaya</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="flex space-x-2">
-                        <!-- Instagram Button -->
+                        <!-- TikTok Button -->
                         <div class="flex items-center justify-center w-10 h-10 bg-black rounded-full flag-icon"
                             onclick="window.open('https://www.tiktok.com/@unkyas')" title="yas">
                             <img class="h-6 flag-icon" src="image/ttk2.PNG">
@@ -82,6 +82,11 @@
                             onclick="window.open('https://twitter.com/grassthemorning')" title="grassthemorning">
                             <img class="h-6 flag-icon opacity-100" src="image/X (1).png">
                         </div>
+                        <!-- Instagram Button (Novo) -->
+                        <div class="flex items-center justify-center w-10 h-10 bg-black rounded-full flag-icon"
+                            onclick="window.open('https://www.instagram.com/yourusername')" title="discord">
+                            <img class="h-6 flag-icon" src="image/discord_white.png"> <!-- Coloque a imagem do ícone do Instagram -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,7 +94,7 @@
     </div>
 
     <video id="video"
-        class="fixed top-0 left-0 w-full h-full object-cover -z-10 brightness-[.3] saturate-100 hidden"
+        class="fixed top-0 left-0 w-full h-full object-cover -z-10 saturate-100 hidden"
         src="./image/shw2.mp4" loop muted playsInline webkit-playsinline></video>
 
     <script>
@@ -220,58 +225,3 @@
 </body>
 
 </html>
-<script>
-    // Desabilita o clique com o botão direito do mouse
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    // Desabilita a tecla F12 (console)
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12') {
-            e.preventDefault();
-        }
-
-        // Desabilita as teclas Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) {
-            e.preventDefault();
-        }
-        if (e.ctrlKey && e.key === 'U') {
-            e.preventDefault();
-        }
-
-        // Desabilita Ctrl+C, Ctrl+V e Ctrl+X
-        if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x')) {
-            e.preventDefault();
-        }
-    });
-
-    // Desabilita a seleção de texto
-    document.addEventListener('mousedown', function(e) {
-        e.preventDefault();
-    });
-
-    // Desabilita a função de copiar ao pressionar Ctrl+C
-    document.addEventListener('copy', function(e) {
-        e.preventDefault();
-    });
-
-    // Bloqueia ações de copiar, selecionar e segurar em dispositivos móveis
-    document.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-    });
-
-    // Desabilita a funcionalidade de selecionar texto em dispositivos móveis
-    document.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-    });
-
-    // Impede o uso do gesto de copiar (pressionar e segurar)
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    // Desabilita o menu de seleção em dispositivos móveis
-    document.body.style.webkitUserSelect = 'none'; // Safari
-    document.body.style.userSelect = 'none'; // Outros navegadores
-</script>
